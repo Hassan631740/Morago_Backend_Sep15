@@ -1,0 +1,50 @@
+===========================================
+RAILWAY ENVIRONMENT VARIABLES - COPY THESE
+===========================================
+
+Go to Railway Dashboard → Your Project → Your Service → Variables Tab
+Add each of these variables:
+
+SPRING_PROFILES_ACTIVE=railway
+
+DATABASE_URL=${{MYSQL_URL}}
+
+DB_USERNAME=${{MYSQLUSER}}
+
+DB_PASSWORD=${{MYSQLPASSWORD}}
+
+DB_DRIVER=com.mysql.cj.jdbc.Driver
+
+DB_DIALECT=org.hibernate.dialect.MySQLDialect
+
+SECURITY_JWT_SECRET=w+oiaKX07gE4mbCpViNX1+BHTLCW8mxvOks91kyGHj4=
+
+JWT_EXPIRATION=86400000
+
+JWT_EXPIRATION_MS=86400000
+
+JWT_REFRESH_EXPIRATION_MS=604800000
+
+SOCKETIO_HOST=0.0.0.0
+
+SOCKETIO_PORT=9092
+
+SOCKETIO_ALLOWED_ORIGINS=*
+
+MAX_FILE_SIZE=10MB
+
+MAX_REQUEST_SIZE=10MB
+
+PORT=8080
+
+===========================================
+IMPORTANT NOTES:
+===========================================
+
+1. Use the exact ${{...}} syntax for Railway service references
+2. DO NOT add quotes around values
+3. Make sure you have a MySQL service running in Railway
+4. After adding variables, Railway will auto-redeploy
+5. Watch deployment logs to confirm success
+
+===========================================

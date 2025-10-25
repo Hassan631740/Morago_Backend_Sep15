@@ -7,15 +7,23 @@ RUN apk add --no-cache maven bash
 # Set working directory
 WORKDIR /app
 
-# Copy pom.xml and download dependencies first (cache optimization)
+# Set Maven options for better performance and reliability
+ENV MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m"
+
+# Copy Maven configuration and pom.xml first for dependency caching
+COPY .mvn .mvn
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
+
+# Download dependencies with retry logic
+RUN mvn dependency:resolve -B --fail-at-end || \
+    (sleep 10 && mvn dependency:resolve -B --fail-at-end) || \
+    (sleep 20 && mvn dependency:resolve -B --fail-at-end -U)
 
 # Copy source code
 COPY src ./src
 
 # Build the jar
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -B --fail-at-end
 
 # ===== Stage 2: Runtime =====
 FROM eclipse-temurin:21-jdk-alpine

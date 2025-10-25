@@ -35,6 +35,10 @@ sleep 15
 
 # Start the application
 echo "Starting Java application..."
+echo "JAR file location: $(ls -la app.jar 2>/dev/null || echo 'app.jar not found!')"
+echo "Working directory: $(pwd)"
+echo "Java version: $(java -version 2>&1 | head -1)"
+
 exec java \
     -Dserver.port=$PORT \
     -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE \

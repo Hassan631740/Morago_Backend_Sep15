@@ -26,10 +26,10 @@ COPY src ./src
 RUN mvn clean package -DskipTests -B --fail-at-end
 
 # ===== Stage 2: Runtime =====
-FROM eclipse-temurin:21-jdk-alpine
+FROM eclipse-temurin:21-jre-alpine
 
-# Install curl for health checks
-RUN apk add --no-cache curl
+# Install curl for health checks and bash for startup script
+RUN apk add --no-cache curl bash
 
 # Set working directory
 WORKDIR /app
@@ -52,4 +52,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
   CMD curl -f http://localhost:${PORT:-8080}/actuator/health || exit 1
 
 # Run Spring Boot jar with better JVM options
-ENTRYPOINT ["./startup.sh"]
+ENTRYPOINT ["/app/startup.sh"]

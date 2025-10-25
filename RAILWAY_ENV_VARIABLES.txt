@@ -14,8 +14,13 @@ SPRING_PROFILES_ACTIVE=railway
 # DATABASE CONFIGURATION (Using Railway MySQL)
 # --------------------------------------------------------------------
 # Railway provides: MYSQLHOST, MYSQLPORT, MYSQLDATABASE, MYSQLUSER, MYSQLPASSWORD
-# Use reference variables like this:
-DATABASE_URL=jdbc:mysql://${{MYSQLHOST}}:${{MYSQLPORT}}/${{MYSQLDATABASE}}?useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+# Use Railway's built-in MYSQL_URL or construct manually:
+# Option 1: Use Railway's built-in MYSQL_URL (recommended)
+DATABASE_URL=${{MYSQL_URL}}
+
+# Option 2: Manual construction (if MYSQL_URL doesn't work)
+# DATABASE_URL=jdbc:mysql://${{MYSQLHOST}}:${{MYSQLPORT}}/${{MYSQLDATABASE}}?useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+
 DB_USERNAME=${{MYSQLUSER}}
 DB_PASSWORD=${{MYSQLPASSWORD}}
 DB_DRIVER=com.mysql.cj.jdbc.Driver

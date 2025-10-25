@@ -17,6 +17,15 @@ public class HealthController {
         Map<String, String> response = new HashMap<>();
         response.put("status", "UP");
         response.put("service", "morago-backend");
+        response.put("timestamp", String.valueOf(System.currentTimeMillis()));
+        return ResponseEntity.ok(response);
+    }
+    
+    @GetMapping("/ping")
+    public ResponseEntity<Map<String, String>> ping() {
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "PONG");
+        response.put("service", "morago-backend");
         return ResponseEntity.ok(response);
     }
 }

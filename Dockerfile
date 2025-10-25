@@ -45,7 +45,7 @@ RUN chmod +x startup.sh
 EXPOSE 8080
 
 # Set Spring profile to railway for Railway deployment
-ENV SPRING_PROFILES_ACTIVE=railway
+ENV SPRING_PROFILES_ACTIVE=railway,railway-minimal
 
 # Add health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \

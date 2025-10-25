@@ -1,0 +1,37 @@
+# Railway Environment Variables Template
+# Copy these variables to your Railway project settings
+
+# Database Configuration (Railway will provide these automatically)
+# DATABASE_URL=jdbc:mysql://mysql.railway.internal:3306/railway
+# MYSQL_URL=jdbc:mysql://mysql.railway.internal:3306/railway
+# MYSQLHOST=mysql.railway.internal
+# MYSQLPORT=3306
+# MYSQLUSER=root
+# MYSQLPASSWORD=your_password_here
+# MYSQLDATABASE=railway
+
+# JWT Configuration (Required)
+SECURITY_JWT_SECRET=w+oiaKX07gE4mbCpViNX1+BHTLCW8mxvOks91kyGHj4=
+JWT_EXPIRATION=86400000
+JWT_EXPIRATION_MS=86400000
+JWT_REFRESH_EXPIRATION_MS=604800000
+
+# Socket.IO Configuration
+SOCKETIO_HOST=0.0.0.0
+SOCKETIO_PORT=9092
+SOCKETIO_ALLOWED_ORIGINS=*
+
+# AWS S3 Configuration (Optional - for file uploads)
+AWS_S3_BUCKET=morago-backend-files
+AWS_S3_REGION=ap-northeast-2
+AWS_S3_ACCESS_KEY=your_access_key
+AWS_S3_SECRET_KEY=your_secret_key
+AWS_S3_ENDPOINT=
+AWS_S3_BASE_URL=https://morago-backend-files.s3.ap-northeast-2.amazonaws.com
+
+# File Upload Configuration
+MAX_FILE_SIZE=10MB
+MAX_REQUEST_SIZE=10MB
+
+# Spring Configuration
+SPRING_PROFILES_ACTIVE=railway

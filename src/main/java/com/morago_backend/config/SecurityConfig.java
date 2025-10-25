@@ -57,7 +57,7 @@ public class SecurityConfig {
                         .requestMatchers("/v3/api-docs", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/swagger-resources/**", "/configuration/**", "/webjars/**", "/actuator/**","/h2-console/**").permitAll()
                         // Allow other public endpoints
-                        .requestMatchers("/", "/api/auth/**", "/api/tokens/**", "/api/password-resets/**", "/webrtc-test.html", "/socket.io/**", "/actuator/**").permitAll()
+                        .requestMatchers("/", "/api/auth/**", "/api/tokens/**", "/api/password-resets/**", "/webrtc-test.html", "/socket.io/**", "/actuator/**", "/api/health", "/api/ping").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMINISTRATOR")
                         .requestMatchers("/api/roles/**").hasRole("ADMINISTRATOR")
                         // Allow authenticated users to access their own profile and change password

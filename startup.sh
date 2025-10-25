@@ -12,14 +12,19 @@ echo "Spring Profile: $SPRING_PROFILES_ACTIVE"
 
 # Check database configuration
 echo "Database configuration check:"
-if [ -n "$DATABASE_URL" ]; then
+if [ -n "$MYSQL_URL" ]; then
+    echo "✓ MYSQL_URL is set (Railway preferred)"
+    echo "  URL: ${MYSQL_URL:0:50}..." # Show first 50 chars for debugging
+elif [ -n "$DATABASE_URL" ]; then
     echo "✓ DATABASE_URL is set"
-elif [ -n "$MYSQL_URL" ]; then
-    echo "✓ MYSQL_URL is set"
+    echo "  URL: ${DATABASE_URL:0:50}..." # Show first 50 chars for debugging
 elif [ -n "$DB_USERNAME" ] && [ -n "$DB_PASSWORD" ]; then
     echo "✓ DB_USERNAME and DB_PASSWORD are set"
+    echo "  Username: $DB_USERNAME"
 elif [ -n "$MYSQLHOST" ] && [ -n "$MYSQLUSER" ] && [ -n "$MYSQLPASSWORD" ]; then
     echo "✓ MYSQLHOST, MYSQLUSER, and MYSQLPASSWORD are set"
+    echo "  Host: $MYSQLHOST"
+    echo "  Username: $MYSQLUSER"
 else
     echo "WARNING: No database configuration found. Spring Boot will use defaults."
     echo "Available database-related environment variables:"

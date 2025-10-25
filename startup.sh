@@ -10,17 +10,20 @@ export SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-railway,railway-minimal}
 echo "Port: $PORT"
 echo "Spring Profile: $SPRING_PROFILES_ACTIVE"
 
-# Check if database URL is set
-if [ -z "$DATABASE_URL" ] && [ -z "$MYSQL_URL" ]; then
-    echo "WARNING: No database URL found. Checking individual MySQL variables..."
-    if [ -z "$MYSQLHOST" ] || [ -z "$MYSQLUSER" ] || [ -z "$MYSQLPASSWORD" ]; then
-        echo "ERROR: Required MySQL environment variables are missing!"
-        echo "Required: MYSQLHOST, MYSQLUSER, MYSQLPASSWORD"
-        echo "Optional: MYSQLPORT, MYSQLDATABASE"
-        echo "Available environment variables:"
-        env | grep -E "(MYSQL|DATABASE|DB_)" || echo "No MySQL-related variables found"
-        exit 1
-    fi
+# Check database configuration
+echo "Database configuration check:"
+if [ -n "$DATABASE_URL" ]; then
+    echo "✓ DATABASE_URL is set"
+elif [ -n "$MYSQL_URL" ]; then
+    echo "✓ MYSQL_URL is set"
+elif [ -n "$DB_USERNAME" ] && [ -n "$DB_PASSWORD" ]; then
+    echo "✓ DB_USERNAME and DB_PASSWORD are set"
+elif [ -n "$MYSQLHOST" ] && [ -n "$MYSQLUSER" ] && [ -n "$MYSQLPASSWORD" ]; then
+    echo "✓ MYSQLHOST, MYSQLUSER, and MYSQLPASSWORD are set"
+else
+    echo "WARNING: No database configuration found. Spring Boot will use defaults."
+    echo "Available database-related environment variables:"
+    env | grep -E "(MYSQL|DATABASE|DB_)" || echo "No database-related variables found"
 fi
 
 # Set default JWT secret if not provided
@@ -31,7 +34,7 @@ fi
 
 # Wait for database to be ready (if needed)
 echo "Waiting for database connection..."
-sleep 15
+sleep 5
 
 # Start the application
 echo "Starting Java application..."

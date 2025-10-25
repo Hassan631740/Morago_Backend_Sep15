@@ -8,7 +8,7 @@ RUN apk add --no-cache maven bash
 WORKDIR /app
 
 # Set Maven options for better performance and reliability
-ENV MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m"
+ENV MAVEN_OPTS="-Xmx1024m"
 
 # Copy Maven configuration and pom.xml first for dependency caching
 COPY .mvn .mvn
